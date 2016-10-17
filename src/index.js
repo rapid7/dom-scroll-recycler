@@ -8,7 +8,6 @@ class DomScrollRecycler extends Component {
     items: PropTypes.array,
     itemHeight: PropTypes.number,
     offset: PropTypes.number,
-    onToggleSelect: PropTypes.func,
     calculatePositionalValues: PropTypes.func
   };
 
@@ -58,7 +57,7 @@ class DomScrollRecycler extends Component {
     const paddingBottom = ((items.length - endPosition) * itemHeight) > 0 ? (items.length - endPosition) * itemHeight : 0;
 
     return (
-      <div style={{height: '100%', overflow: 'scroll'}}
+      <div style={{height: '100%', overflow: 'auto'}}
            onScroll={this.updateScrollPosition}
           {...otherProps}
       >
