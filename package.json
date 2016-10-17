@@ -1,8 +1,8 @@
 {
   "name": "dom-scroll-recycler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A ReactJS wrapper component to limit DOM elements rendered",
-  "main": "src/index.js",
+  "main": "dist/index.js", 
   "keywords": [
     "react",
     "reactjs",
