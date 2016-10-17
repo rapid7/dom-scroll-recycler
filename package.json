@@ -1,0 +1,41 @@
+{
+  "name": "dom-scroll-recycler",
+  "version": "1.0.0",
+  "description": "A ReactJS wrapper component to limit DOM elements rendered",
+  "main": "src/index.js",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-component",
+    "dom",
+    "recycle",
+    "scroll",
+    "limit",
+    "render"
+  ],
+  "author": "Phil Quinn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rapid7/dom-scroll-recycler.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config webpack.config.js --display-error-details",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "babel": "6.5.2",
+    "babel-cli": "6.16.0",
+    "babel-loader": "6.2.5",
+    "babel-preset-es2015": "6.16.0",
+    "babel-preset-react": "6.16.0",
+    "babel-preset-stage-0": "6.16.0",
+    "babel-plugin-transform-es2015-modules-umd": "6.12.0",
+    "babel-plugin-transform-runtime": "6.15.0",
+    "babel-runtime": "6.11.6"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0"
+  }
+}
