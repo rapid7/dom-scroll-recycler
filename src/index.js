@@ -47,9 +47,9 @@ class DomScrollRecycler extends Component {
     const numberItemsToShow = Math.floor(height / itemHeight) + offset;
     if(calculatePositionalValues) {
       const positionalValues = calculatePositionalValues(numberItemsToShow, this.state.scrollPosition);
-      startPosition = startAndEnd.startPosition;
-      endPosition = startAndEnd.endPosition;
-      paddingTop = startAndEnd.paddingTop
+      startPosition = positionalValues.startPosition;
+      endPosition = positionalValues.endPosition;
+      paddingTop = positionalValues.paddingTop
     } else {
       startPosition = this.state.scrollPosition - offset > 0 ? this.state.scrollPosition - offset : 0;
       endPosition = this.state.scrollPosition + numberItemsToShow >= items.length ? items.length : this.state.scrollPosition + numberItemsToShow;
