@@ -57,7 +57,7 @@ class DomScrollRecycler extends Component {
     const paddingBottom = ((items.length - endPosition) * itemHeight) > 0 ? (items.length - endPosition) * itemHeight : 0;
 
     return (
-      <div style={{height: '100%', overflow: 'auto'}}
+      <div style={{overflow: 'auto'}}
            onScroll={this.updateScrollPosition}
           {...otherProps}
       >
