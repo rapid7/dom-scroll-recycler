@@ -5,12 +5,17 @@ import React, {
 
 class DomScrollRecycler extends Component {
   static propTypes = {
+    onRecyclerDidMount: PropTypes.func,
     className: PropTypes.string,
     items: PropTypes.array,
     itemHeight: PropTypes.number,
     offset: PropTypes.number,
     calculatePositionalValues: PropTypes.func
   };
+
+  static defaultProps = {
+    onRecyclerDidMount: () => {}
+  }
 
   constructor(props) {
     super(props);
@@ -20,6 +25,7 @@ class DomScrollRecycler extends Component {
 
   componentDidMount() {
     this.mounted = true;
+    this.props.onRecyclerDidMount(this.refs.container);
   }
 
   updateScrollPosition(e) {
@@ -65,6 +71,7 @@ class DomScrollRecycler extends Component {
 
     return (
       <div
+        ref="container"
         {...stylingProps}
         onScroll={this.updateScrollPosition}
         {...otherProps}
