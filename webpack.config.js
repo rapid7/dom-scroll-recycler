@@ -5,7 +5,6 @@ var webpack = require('webpack');
 var path = require('path');
 
 var plugins = [
-  new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   })
@@ -25,12 +24,12 @@ if (!DEV_MODE) {
 
 module.exports = {
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?$/,
-      loader: 'babel',
+      loader: 'babel-loader',
       exclude: /node_modules/,
       query: { 
-        presets: ['es2015', 'react', 'stage-0'],
+        presets: [['es2015', { modules: false }], 'react', 'stage-0'],
         plugins: ['transform-runtime']
       }
     }]
@@ -49,9 +48,12 @@ module.exports = {
     library: 'domScrollRecycler',
     libraryTarget: 'umd',
   },
-
+  externals: {
+    react: 'react'
+  },
   plugins: plugins,
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['.js'],
+    modules: [__dirname, path.resolve('src'), 'node_modules']
   }
 };
