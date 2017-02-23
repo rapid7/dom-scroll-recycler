@@ -5,6 +5,7 @@ import React, {
 
 class DomScrollRecycler extends Component {
   static propTypes = {
+    className: PropTypes.string,
     items: PropTypes.array,
     itemHeight: PropTypes.number,
     offset: PropTypes.number,
@@ -13,7 +14,7 @@ class DomScrollRecycler extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {scrollPosition: 0};
+    this.state = { scrollPosition: 0 };
     this.updateScrollPosition = this.updateScrollPosition.bind(this);
   }
 
@@ -26,9 +27,9 @@ class DomScrollRecycler extends Component {
     const newScrollPosition = Math.floor(e.target.scrollTop / this.props.itemHeight);
     const change = Math.abs(this.state.scrollPosition - newScrollPosition);
     const recheckInterval = 4;
-    
+
     if (change >= recheckInterval) {
-      this.setState({scrollPosition: newScrollPosition});
+      this.setState({ scrollPosition: newScrollPosition });
     }
   }
 
@@ -38,13 +39,14 @@ class DomScrollRecycler extends Component {
       itemHeight,
       offset,
       calculatePositionalValues,
+      className,
       ...otherProps
     } = this.props;
 
     let startPosition, endPosition, paddingTop;
     const height = this.height || 500;
     const numberItemsToShow = Math.floor(height / itemHeight) + offset;
-    if(calculatePositionalValues) {
+    if (calculatePositionalValues) {
       const positionalValues = calculatePositionalValues(numberItemsToShow, this.state.scrollPosition);
       startPosition = positionalValues.startPosition;
       endPosition = positionalValues.endPosition;
@@ -55,11 +57,17 @@ class DomScrollRecycler extends Component {
       paddingTop = startPosition * itemHeight;
     }
     const paddingBottom = ((items.length - endPosition) * itemHeight) > 0 ? (items.length - endPosition) * itemHeight : 0;
+    const key = className ? 'className' : 'style';
+    const value = className || { overflow: 'auto' };
+    const stylingProps = {
+      [key]: value
+    };
 
     return (
-      <div style={{overflow: 'auto'}}
-           onScroll={this.updateScrollPosition}
-          {...otherProps}
+      <div
+        {...stylingProps}
+        onScroll={this.updateScrollPosition}
+        {...otherProps}
       >
         <div
           key="padding-top"
@@ -70,7 +78,7 @@ class DomScrollRecycler extends Component {
           key="padding-bottom"
           style={{ height: paddingBottom }}
         ></div>
-      </div>
+      </div >
     );
   }
 }
