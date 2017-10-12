@@ -2,7 +2,7 @@
   "name": "dom-scroll-recycler",
   "version": "1.0.5",
   "description": "A ReactJS wrapper component to limit DOM elements rendered",
-  "main": "dist/index.js", 
+  "main": "dist/index.js",
   "keywords": [
     "react",
     "reactjs",
@@ -37,6 +37,7 @@
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react-dom": "^0.14.0 || ^15.0.0",
+    "prop-types": "^15.6.0"
   }
 }
