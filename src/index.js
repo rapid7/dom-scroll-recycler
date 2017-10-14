@@ -1,7 +1,7 @@
 import React, {
-  Component,
-  PropTypes
+  Component
 } from 'react';
+import PropTypes from 'prop-types';
 
 class DomScrollRecycler extends Component {
   static propTypes = {
