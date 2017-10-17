@@ -1,6 +1,6 @@
 {
   "name": "dom-scroll-recycler",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A ReactJS wrapper component to limit DOM elements rendered",
   "main": "dist/index.js",
   "keywords": [
@@ -38,8 +38,8 @@
     "webpack": "2.2.1"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0",
+    "react": "^0.14.0 || ^15.0.0 || ^16.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0 || ^16.0.0",
     "prop-types": "^15.6.0"
   }
 }
