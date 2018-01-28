@@ -46,6 +46,7 @@ class DomScrollRecycler extends Component {
       offset,
       calculatePositionalValues,
       className,
+      isTable,
       ...otherProps
     } = this.props;
 
@@ -69,6 +70,26 @@ class DomScrollRecycler extends Component {
       [key]: value
     };
 
+    if (isTable) {
+      return (
+        <tbody
+          ref="container"
+          {...stylingProps}
+          onScroll={this.updateScrollPosition}
+          {...otherProps}
+        >
+          <tr
+            key="padding-top"
+            style={{ height: paddingTop }}
+          ></tr>
+          {(items.slice(startPosition, endPosition))}
+          <tr
+            key="padding-bottom"
+            style={{ height: paddingBottom }}
+          ></tr>
+        </tbody>
+      )
+    }
     return (
       <div
         ref="container"
