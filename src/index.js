@@ -6,15 +6,17 @@ import PropTypes from 'prop-types';
 class DomScrollRecycler extends Component {
   static propTypes = {
     onRecyclerDidMount: PropTypes.func,
+    calculatePositionalValues: PropTypes.func,
     className: PropTypes.string,
     items: PropTypes.array,
     itemHeight: PropTypes.number,
     offset: PropTypes.number,
-    calculatePositionalValues: PropTypes.func
+    renderWrapper: PropTypes.func,
   };
 
   static defaultProps = {
-    onRecyclerDidMount: () => {}
+    onRecyclerDidMount: () => {},
+    renderWrapper: null,
   }
 
   constructor(props) {
@@ -47,6 +49,9 @@ class DomScrollRecycler extends Component {
       calculatePositionalValues,
       className,
       isTable,
+      // Extracting from props to not pass it down for standard html elements
+      onRecyclerDidMount,
+      renderWrapper,
       ...otherProps
     } = this.props;
 
@@ -65,10 +70,25 @@ class DomScrollRecycler extends Component {
     }
     const paddingBottom = ((items.length - endPosition) * itemHeight) > 0 ? (items.length - endPosition) * itemHeight : 0;
     const key = className ? 'className' : 'style';
-    const value = className || { overflow: 'auto' };
+    const value = className || { 'overflow-y': 'auto', height: '100%' };
     const stylingProps = {
       [key]: value
     };
+
+    if (renderWrapper) {
+      return renderWrapper({
+        ...stylingProps,
+        ...otherProps,
+        endPosition,
+        items,
+        itemHeight,
+        onRecyclerDidMount,
+        onScroll: this.updateScrollPosition,
+        paddingBottom,
+        paddingTop,
+        startPosition,
+      });
+    }
 
     if (isTable) {
       return (
