@@ -47,6 +47,7 @@ class DomScrollRecycler extends Component {
       calculatePositionalValues,
       className,
       isTable,
+      onRecyclerDidMount,
       ...otherProps
     } = this.props;
 
