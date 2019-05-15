@@ -81,7 +81,11 @@ class DomScrollRecycler extends Component {
         >
           <tr
             key="padding-top"
-            style={{ height: paddingTop }}
+            style={{
+              display: 'table',
+              height: paddingTop,
+              width: '100%',
+            }}
           ></tr>
           {(items.slice(startPosition, endPosition))}
           <tr
