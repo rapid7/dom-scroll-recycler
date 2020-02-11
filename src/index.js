@@ -4,19 +4,6 @@ import React, {
 import PropTypes from 'prop-types';
 
 class DomScrollRecycler extends Component {
-  static propTypes = {
-    onRecyclerDidMount: PropTypes.func,
-    className: PropTypes.string,
-    items: PropTypes.array,
-    itemHeight: PropTypes.number,
-    offset: PropTypes.number,
-    calculatePositionalValues: PropTypes.func
-  };
-
-  static defaultProps = {
-    onRecyclerDidMount: () => {}
-  }
-
   constructor(props) {
     super(props);
     this.state = { scrollPosition: 0 };
@@ -24,7 +11,6 @@ class DomScrollRecycler extends Component {
   }
 
   componentDidMount() {
-    this.mounted = true;
     this.props.onRecyclerDidMount(this.refs.container);
   }
 
@@ -47,12 +33,13 @@ class DomScrollRecycler extends Component {
       calculatePositionalValues,
       className,
       isTable,
+      containerHeight,
       onRecyclerDidMount,
       ...otherProps
     } = this.props;
 
     let startPosition, endPosition, paddingTop;
-    const height = this.height || 500;
+    const height = this.height || containerHeight;
     const numberItemsToShow = Math.floor(height / itemHeight) + offset;
     if (calculatePositionalValues) {
       const positionalValues = calculatePositionalValues(numberItemsToShow, this.state.scrollPosition);
@@ -86,7 +73,7 @@ class DomScrollRecycler extends Component {
               height: paddingTop,
               width: '100%',
             }}
-          ></tr>
+          />
           {(items.slice(startPosition, endPosition))}
           <tr
             key="padding-bottom"
@@ -95,7 +82,7 @@ class DomScrollRecycler extends Component {
               height: paddingBottom,
               width: '100%',
             }}
-          ></tr>
+          />
         </tbody>
       )
     }
@@ -109,15 +96,30 @@ class DomScrollRecycler extends Component {
         <div
           key="padding-top"
           style={{ height: paddingTop }}
-        ></div>
+        />
         {(items.slice(startPosition, endPosition))}
         <div
           key="padding-bottom"
           style={{ height: paddingBottom }}
-        ></div>
-      </div >
+        />
+      </div>
     );
   }
 }
+
+DomScrollRecycler.propTypes = {
+  calculatePositionalValues: PropTypes.func,
+  className: PropTypes.string,
+  containerHeight: PropTypes.number,
+  itemHeight: PropTypes.number,
+  items: PropTypes.array,
+  offset: PropTypes.number,
+  onRecyclerDidMount: PropTypes.func
+};
+
+DomScrollRecycler.defaultProps = {
+  containerHeight: 500,
+  onRecyclerDidMount: () => {}
+};
 
 export default DomScrollRecycler;

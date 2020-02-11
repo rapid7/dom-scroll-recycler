@@ -1,37 +1,40 @@
 /* eslint-disable */
 'use strict';
 
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const TerserPlugin = require("terser-webpack-plugin");
 
-var plugins = [
+const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   })
 ];
 
-var DEV_MODE = process.env.NODE_ENV !== 'production';
+const DEV_MODE = process.env.NODE_ENV !== 'production';
 
 if (!DEV_MODE) {
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
+    new TerserPlugin({
+      cache: false,
+      parallel: true,
+      sourceMap: false,
+      terserOptions: {
+        output: {
+          comments: false
+        }
       }
     })
   );
 }
 
 module.exports = {
+  mode: 'production',
   module: {
     rules: [{
       test: /\.jsx?$/,
-      loader: 'babel-loader',
+      loader: "babel-loader",
       exclude: /node_modules/,
-      query: { 
-        presets: [['es2015', { modules: false }], 'react', 'stage-0'],
-        plugins: ['transform-runtime']
-      }
     }]
   },
 
